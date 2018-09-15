@@ -2,6 +2,6 @@
 
 Nama  : Hilya Auli Fesmia
 
-Kelas : GameDev Gasal 2018/2019
+Kelas : Game Development Gasal 2018/2019
 
 Repositori tutorial lab mata kuliah Game Development
