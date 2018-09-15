@@ -1,0 +1,138 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://Scenes/Main.gd" type="Script" id=1]
+[ext_resource path="res://Scenes/ParallaxBackground.gd" type="Script" id=2]
+[ext_resource path="res://Sprites/Background/background blue@2x.png" type="Texture" id=3]
+[ext_resource path="res://Scripts/Player.gd" type="Script" id=4]
+[ext_resource path="res://Sprites/player.png" type="Texture" id=5]
+[ext_resource path="res://Scenes/Enemy.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Scenes/Laser.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Sounds/soundtrack.wav" type="AudioStream" id=8]
+[ext_resource path="res://Sprites/tumblr_numr0h4msw1uddskco1_500.png" type="Texture" id=9]
+
+[sub_resource type="RectangleShape2D" id=1]
+
+custom_solver_bias = 0.0
+extents = Vector2( 10, 10 )
+
+[node name="Main" type="Node2D" index="0"]
+
+script = ExtResource( 1 )
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="." index="0"]
+
+layer = -1
+offset = Vector2( 0, 0 )
+rotation = 0.0
+scale = Vector2( 1, 1 )
+transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+scroll_offset = Vector2( 0, 0 )
+scroll_base_offset = Vector2( 0, 0 )
+scroll_base_scale = Vector2( 1, 1 )
+scroll_limit_begin = Vector2( 0, 0 )
+scroll_limit_end = Vector2( 0, 0 )
+scroll_ignore_camera_zoom = true
+script = ExtResource( 2 )
+_sections_unfolded = [ "Scroll" ]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground" index="0"]
+
+motion_scale = Vector2( 1, 1 )
+motion_offset = Vector2( 0, 0 )
+motion_mirroring = Vector2( 0, 0 )
+_sections_unfolded = [ "Material", "Motion", "Pause", "Transform", "Visibility", "Z Index" ]
+
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayer" index="0"]
+
+position = Vector2( 516.319, -4105.44 )
+scale = Vector2( 0.738166, 0.738166 )
+texture = ExtResource( 3 )
+_sections_unfolded = [ "Animation", "Offset" ]
+
+[node name="Player" type="Area2D" parent="." index="1"]
+
+position = Vector2( 536.945, 562.673 )
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+audio_bus_override = false
+audio_bus_name = "Master"
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_group_": true
+}
+speed = 300
+
+[node name="Sprite" type="Sprite" parent="Player" index="0"]
+
+position = Vector2( 0.456314, -0.739128 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 5 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player" index="1"]
+
+position = Vector2( 0.53221, -0.221444 )
+scale = Vector2( 2.49191, 1.969 )
+shape = SubResource( 1 )
+
+[node name="Enemy" parent="." index="2" instance=ExtResource( 6 )]
+
+position = Vector2( 942.181, 47.3822 )
+speed = 400
+
+[node name="Enemy2" parent="." index="3" instance=ExtResource( 6 )]
+
+position = Vector2( 584.143, 179.487 )
+speed = 200
+
+[node name="Enemy3" parent="." index="4" instance=ExtResource( 6 )]
+
+position = Vector2( 621.951, 42.3908 )
+speed = 500
+
+[node name="Enemy4" parent="." index="5" instance=ExtResource( 6 )]
+
+position = Vector2( 443.941, 122.86 )
+speed = 100
+
+[node name="Laser" parent="." index="6" instance=ExtResource( 7 )]
+
+[node name="Enemy5" parent="." index="7" instance=ExtResource( 6 )]
+
+position = Vector2( 786.863, 92.1868 )
+
+[node name="Enemy6" parent="." index="8" instance=ExtResource( 6 )]
+
+position = Vector2( 201.53, 167.651 )
+speed = 300
+
+[node name="Enemy11" parent="." index="9" instance=ExtResource( 6 )]
+
+position = Vector2( 305.788, 73.7668 )
+_sections_unfolded = [ "Collision" ]
+
+[node name="Enemy12" parent="." index="10" instance=ExtResource( 6 )]
+
+position = Vector2( 108.294, 44.8354 )
+
+[node name="soundtrack" type="AudioStreamPlayer" parent="." index="11"]
+
+stream = ExtResource( 8 )
+volume_db = 0.0
+pitch_scale = 1.0
+autoplay = true
+mix_target = 0
+bus = "Master"
+
+[node name="GameOver" type="Sprite" parent="." index="12"]
+
+position = Vector2( 523.503, 283.017 )
+texture = ExtResource( 9 )
+_sections_unfolded = [ "Animation", "Offset", "Region", "Transform", "Visibility", "Z Index" ]
+
+[connection signal="area_entered" from="Player" to="Player" method="_on_Player_area_entered"]
+
+
