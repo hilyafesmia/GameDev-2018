@@ -1,14 +1,16 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Scenes/Main.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/ParallaxBackground.gd" type="Script" id=2]
 [ext_resource path="res://Sprites/Background/background blue@2x.png" type="Texture" id=3]
 [ext_resource path="res://Scripts/Player.gd" type="Script" id=4]
 [ext_resource path="res://Sprites/player.png" type="Texture" id=5]
-[ext_resource path="res://Scenes/Enemy.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Scenes/Laser.tscn" type="PackedScene" id=7]
-[ext_resource path="res://Sounds/soundtrack.wav" type="AudioStream" id=8]
-[ext_resource path="res://Sprites/tumblr_numr0h4msw1uddskco1_500.png" type="Texture" id=9]
+[ext_resource path="res://Sounds/sfx_shoot_2.wav" type="AudioStream" id=6]
+[ext_resource path="res://Sounds/sfx_lose.wav" type="AudioStream" id=7]
+[ext_resource path="res://Scenes/Enemy.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Scenes/Laser.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Sounds/soundtrack.wav" type="AudioStream" id=10]
+[ext_resource path="res://Sprites/tumblr_numr0h4msw1uddskco1_500.png" type="Texture" id=11]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -78,49 +80,67 @@ position = Vector2( 0.53221, -0.221444 )
 scale = Vector2( 2.49191, 1.969 )
 shape = SubResource( 1 )
 
-[node name="Enemy" parent="." index="2" instance=ExtResource( 6 )]
+[node name="shooting_sound" type="AudioStreamPlayer" parent="Player" index="2"]
+
+stream = ExtResource( 6 )
+volume_db = 0.0
+pitch_scale = 1.0
+autoplay = false
+mix_target = 0
+bus = "Master"
+
+[node name="losing_sound" type="AudioStreamPlayer" parent="Player" index="3"]
+
+stream = ExtResource( 7 )
+volume_db = 0.0
+pitch_scale = 1.0
+autoplay = false
+mix_target = 0
+bus = "Master"
+
+[node name="Enemy" parent="." index="2" instance=ExtResource( 8 )]
 
 position = Vector2( 942.181, 47.3822 )
 speed = 400
 
-[node name="Enemy2" parent="." index="3" instance=ExtResource( 6 )]
+[node name="Enemy2" parent="." index="3" instance=ExtResource( 8 )]
 
 position = Vector2( 584.143, 179.487 )
 speed = 200
 
-[node name="Enemy3" parent="." index="4" instance=ExtResource( 6 )]
+[node name="Enemy3" parent="." index="4" instance=ExtResource( 8 )]
 
 position = Vector2( 621.951, 42.3908 )
 speed = 500
 
-[node name="Enemy4" parent="." index="5" instance=ExtResource( 6 )]
+[node name="Enemy4" parent="." index="5" instance=ExtResource( 8 )]
 
 position = Vector2( 443.941, 122.86 )
 speed = 100
 
-[node name="Laser" parent="." index="6" instance=ExtResource( 7 )]
+[node name="Laser" parent="." index="6" instance=ExtResource( 9 )]
 
-[node name="Enemy5" parent="." index="7" instance=ExtResource( 6 )]
+[node name="Enemy5" parent="." index="7" instance=ExtResource( 8 )]
 
 position = Vector2( 786.863, 92.1868 )
 
-[node name="Enemy6" parent="." index="8" instance=ExtResource( 6 )]
+[node name="Enemy6" parent="." index="8" instance=ExtResource( 8 )]
 
 position = Vector2( 201.53, 167.651 )
 speed = 300
 
-[node name="Enemy11" parent="." index="9" instance=ExtResource( 6 )]
+[node name="Enemy11" parent="." index="9" instance=ExtResource( 8 )]
 
 position = Vector2( 305.788, 73.7668 )
 _sections_unfolded = [ "Collision" ]
 
-[node name="Enemy12" parent="." index="10" instance=ExtResource( 6 )]
+[node name="Enemy12" parent="." index="10" instance=ExtResource( 8 )]
 
 position = Vector2( 108.294, 44.8354 )
 
 [node name="soundtrack" type="AudioStreamPlayer" parent="." index="11"]
 
-stream = ExtResource( 8 )
+stream = ExtResource( 10 )
 volume_db = 0.0
 pitch_scale = 1.0
 autoplay = true
@@ -130,7 +150,8 @@ bus = "Master"
 [node name="GameOver" type="Sprite" parent="." index="12"]
 
 position = Vector2( 523.503, 283.017 )
-texture = ExtResource( 9 )
+scale = Vector2( 1.5, 1.5 )
+texture = ExtResource( 11 )
 _sections_unfolded = [ "Animation", "Offset", "Region", "Transform", "Visibility", "Z Index" ]
 
 [connection signal="area_entered" from="Player" to="Player" method="_on_Player_area_entered"]

@@ -27,11 +27,11 @@ func _process(delta):
 		n_bullet.position = position
 		n_bullet.position.y -= 30
 		get_node("/root/Main").add_child(n_bullet)
+		get_node("shooting_sound").play()
 
 
 func _on_Player_area_entered(area):
 	if area.is_in_group("enemy"):	# Kalo ketemu enemy, enemy akan hancur (queue_free itu destroy)
-		area.queue_free()		# dan player akan hancur juga
+		area.queue_free()			# dan player akan hancur juga
 		queue_free()
 		get_node("/root/Main/GameOver").show()
-		
